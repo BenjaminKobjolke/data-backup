@@ -1,0 +1,5 @@
+{
+    "source": "C:/path/to/project",
+    "files": ["data/app.db"],
+    "target": "D:/Backups/project/app.zip"
+}

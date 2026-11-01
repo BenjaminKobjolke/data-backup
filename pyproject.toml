@@ -1,0 +1,44 @@
+[project]
+name = "databackup"
+version = "0.1.0"
+description = "CLI tool to back up data files (SQLite-safe) into rotated zip archives"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.14.2",
+]
+
+[project.scripts]
+databackup = "databackup.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/databackup"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+# ruff format also rewrites code blocks inside Markdown, which would mangle CODING_RULES.md.
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
